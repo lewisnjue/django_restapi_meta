@@ -176,3 +176,106 @@ lets create a crud booklist api project
 ... 
 book = Book.objects.get(pk=16)
 return jsonresponse(model_to_dict(book))
+when you update your api it many break the existing app since 
+the results may differ for this reason you should always use 
+versionin gand keep old api intact and timely launch 
+save packages and version numbers separetely 
+to save packages and version numbers use pip3 freeze > requirements.txt 
+if you are using pipenv your will be lucky since the requerments and version 
+number will be kept by piplock file 
+
+DEBUGGING API 
+debugging allows you to find and fix erros in your code effeictly 
+here we are going to learn how to use the built in debugger in 
+vusual studion code 
+
+DJANGO RESTFRAMEWORK 
+it is a toolkit that speeds up api development 
+since in api development you will be dealing with json and 
+xml here it is where DRF comes to play 
+the basic idea is that you will fetch data from the database and 
+then use drf to present it to the client in json format 
+this conversion process is called serialization  of the the drf 
+benefit 
+with drf you dont have to worry converting models to restapi , drf 
+do this for you using utility classes 
+some of the benefit of using DRF are :
+. easy to integrate 
+. web browsable api 
+. comes with request and response processing 
+. readable http status codes ( human readable ) for example (
+  status.http_200_ok)
+
+)
+. it also comes with built in serialzers which help data conversion ( 
+  conversion of non-orm objects
+)
+. drf also support deserialization  which also varidate data input 
+to ensure no data corrupsion 
+. it also comes with authentication layer which is built in it also 
+provide social connection and authorization ( external provider )
+
+INSTALLING AND SETTING UPP DRF 
+
+it is advisable to use pipenv in setting up django or any other project 
+than using others like virtualenv which makes our lifes 
+very difficult in terms of managing our packages 
+
+to install drf use the following command 
+pipenv installl djangorestframework 
+after this go to the installed apps and the following 
+rest_framework 
+look at the following end point that dispaly a messange 
+
+...
+  sh
+
+from rest_framework.response import Response 
+from rest_framework import status 
+from rest_framework.decorators import api_view 
+
+@api_view()
+def books(reqeust):
+  return Response('list of the books',status=stuatus.http_200_ok)
+...
+that is a simple endpoint of an api you can develop using 
+django 
+the default method that is allowed by def is get method 
+to for example allow POST request you can do the following 
+@api_view(['POST'])
+#rest of the code 
+. this tells the drf to allow post reqest to this endpoint 
+. this decorator is very important and dont forget of adding it in every view in drf
+. using this decorator you can imprement throtting and or rate limiting 
+which we will look at later 
+.this decoreator also allow for authentication so that only the authenticated user 
+can be able to make a request to this api endpoint
+
+FUNCITON AND CLASS BASED VIEWS 
+
+function based view and class based view comes with their own advantanges and disadvantages 
+for example funtion based views are easy to imprement , 
+offer better readability , easier to use the decorators 
+and write onece off solution quickly 
+. in class based view you can write less code, less code duplication 
+and extend and add features plus you can write methods for http request types 
+
+
+from rest_framework.views import APIVIEW 
+
+class BookList(APIVIEW):
+  def get(self,request):
+    return Resoponse({"messange":"list of the books"},status.http_200_ok)
+
+this is a simple class based view with djano rest api 
+
+. to get the data passed to a request in api you can use 
+request.data.get('name')
+for example 
+
+class BookList(APIVIEW):
+  def post(self,request):
+    return Response({"title":request.data.get('title')},status.http_201_created)
+
+
+
