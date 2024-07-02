@@ -1,0 +1,178 @@
+                    MY NOTES 
+. when you are on website the data is transfered using http or htpps 
+to get data .
+. https is more secure 
+. with https the client computer enscript the data when  the request 
+is sent to the server and then when the server receives 
+the request it decript it :) and then that its 
+. http dont do that and theirfore a good to use https 
+. some of the http methods include :
+    GET
+    POST
+    PUT ->
+    DELETE -> delete 
+    UPDATE -> 
+    PATCH -> partially update 
+. these methods do as their name says 
+. some of the things that http request have include 
+version type 
+url 
+method 
+request headers
+body ( optional )
+. after the http reqeust comes the http response which contain 
+information that helps the browser display content 
+. some of the content that a response contain include :
+reqeusted resource 
+content lenght 
+content type 
+headers 
+etags 
+time last modified 
+http status codes 
+            RESTFULESS 
+an api(application programming interface ) is a gateway to the backend data 
+an api is restfull if it complies with some things lets look at them:
+clinet server artitechture ( server that seave the resources and client that consume them )
+stateless( no prior info included about the clinet  )
+should be cacheable ( response can be saved by any system   help reduce the server load )
+layed ( system can be split into layes , add or remote layer at any time ,
+layers of a restfull api could include the following :
+firewall
+load balancer
+webserver 
+database 
+  )
+uniform interface ( example unique URLs , unified procedures and more  )
+optional code on demand ( api can produce business login 
+code that can improve results 
+ )
+
+RESOURCES 
+resources are core part of every rest api . for this lets take an example 
+of little lemon which have a phone app which can be used by customers and managers ,
+managers can use the app to get information about the orders and customers 
+customers use the app to browse the menu and place orders 
+. to do all of this the app use diffrent api to fetch data from the 
+server and in each case the resource type will be diffrent , lets exprore 
+some of the example 
+RESOURCE TYPES 
+if the manager want to see all of order he can call this 
+API 1 : https://little.lemon/orders
+. the resource type in this case is an order object 
+lets take another example where the manager what to get a given order : 
+API 2: https://little.lemon/orders/16
+the resource type hereis order object 
+API3: https://little.lemon/orders/16/custorm -> to see who placed the order 
+
+the resource type in this case is an cusotmer object 
+API 4: https://little.lemon/orders/16/menu-items
+resource type in this case is menu-itmes object 
+API 5 https://little.lemon/menu-items
+resource type is menu item object 
+https://little.lemon/menu-items?category=appetizers 
+resource type here is menu item object 
+note that the resource type is the same 
+NAMING CONVENTION 
+
+assuming that little lemon app need to create an api to display all 
+the orders, a suitable name will be :
+https://little.lemon/orders dont use capital O on orders 
+so your api endpoint should always use lowercase letters and 
+hyphens in between words 
+using snake_case or TitleCase or camelCase is not a good practice 
+. if your api require a user or a variable of any type use camel case 
+for example an api for a specific order could be :
+/orders/{orderId}
+
+. your api should always use nouns and not verbs , this show 
+poor desiqn of an api 
+. also dont use http mehtods like delete as names of your api please 
+DELETE -> /users/{userId}
+PUT OR PATCH -> /orders/{orderId}
+never use a file name extendion like .json in your naminng of the api 
+if for example you want a json format you can do it this way 
+/orders/{orderId}?format=json 
+/orders/{orderId}?format=xml
+
+for minified version of a javascript file 
+/assets/js/jquery/3.6.0/min 
+api names that end with a trainisng slash is a bad practice 
+
+
+ESSENTIAL TOOLS FOR API DEVELOPMENT 
+. first is curl which is a command line utility used to make http calls 
+this makes it easy to make it get request for other request you can do for examle post resquest 
+curl -d "project-littlelemon" -x post 
+https://postname-echo.com/post 
+. the second tool is post man 
+. the third tool is osommia which is used to store , organize and 
+execute rest api reqeusts 
+. also a text editor like visual studio or sublime text 
+acknowledgmenst :
+. insomnia , a product of kong ,is an open-source tool for tesing and 
+debugging apis 
+. httpbin is an open source http reqeust and response service created by 
+kenneth reitz 
+
+
+HOW TO CREATE A DJSNO PROJECT USING PIPENV 
+first create a directory for your project and move to that 
+directory , then install django with pipenv by running the follwing 
+command :
+pipenv install django 
+after this you can activate your virtualenv by running the follwing command 
+pipenv shell 
+then you can create a project 
+django-admin startproject <name> rest  you know 
+
+REST API BEST PRACTICES
+
+. the first one is kiss(keep it simple stupid)
+what this mean is that each api should be for one task ,ie 
+for every task develop an api 
+. the second best practice is to provide a way to filter, order and paginate a reqeust
+. another practice is to use versioning 
+. caching by configuring headers (do more reseach )
+. another is rate limiting and monitoring limiting limits the 
+number of times a persion can call your api per minitues , hours or day , monitoring 
+ensure that the clinet gets the best response from your api 
+like stuatus code 
+
+SECURITY AND AUTHENTICATION IN REST API 
+
+. the porpose of an api is to make your data more accessible 
+not for your apps or website but for third parties 
+. dont forget that since api are publically available they might 
+pass a risk to your backend and theirfor security is paramount bro 
+. first is ssl (secure socket layer ), ssl encript and secure  your data when it learves 
+the browser or client  when you set it propery your website 
+will be served using https instead of http which is not secure 
+. another is signed urls where for example  little lemon 
+wants their api to be accessed by only thier mobile app this is where 
+signed urls comes to play( limited access to a resource for a limited time  )
+to help this we use signature in our request and to help create this signature 
+we use tool like HMAC=> do more research 
+. another is authentication lets take an exmple where inorder to use 
+an api you will be required to be authenticated , in this case you can 
+be in every api call pass the password and username but this is not secure 
+for that reason we use token based authentication over 
+httb basic authentication 
+.to do this you can use something like json web token (JWT)
+. for authentication , 401 means unauthorized which means username and password dont match 
+. 403 means forbidden ( you dont have permission to perform the action )
+CROSS-ORIGIN RESOURCE SHARING (cors policy and firewalls)
+by configuring the cors header you can only accept calls from specific domain 
+this is serverside login 
+. another is firewalls which you can learn in linux course .
+
+ACCESS CONTROL 
+
+roles and priveleges are the key for access control 
+role ( collection of privileges  )
+privilege ( authority to do task )
+
+lets create a crud booklist api project
+... 
+book = Book.objects.get(pk=16)
+return jsonresponse(model_to_dict(book))
